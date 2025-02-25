@@ -17,7 +17,7 @@ public class ResultsJPanel  extends JPanel {
 
     private void setupUi() {
         setPreferredSize(new Dimension(WIDTH,HEIGHT));
-        setBackground(new Color(81, 218, 236));
+        setBackground(new Color(255, 255, 255));
         setupLayout();
         setupComponent();
     }
