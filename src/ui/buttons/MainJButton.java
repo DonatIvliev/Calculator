@@ -24,6 +24,7 @@ public class MainJButton extends JButton {
         setBackground(new Color(229, 255, 227));
         setFont(new Font("Arial", Font.PLAIN, 14));
         setPreferredSize(new Dimension(70, 20));
+        setMaximumSize(new Dimension(70, 20));
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

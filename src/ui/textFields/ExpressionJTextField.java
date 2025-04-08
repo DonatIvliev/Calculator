@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
 
 public class ExpressionJTextField extends JTextField {
-    private static final int HEIGHT = 50;
+    private static final int HEIGHT = 20;
     private static final int WIDTH = 250;
     private Color brdColor;
     private Shape shape;
@@ -23,6 +23,8 @@ public class ExpressionJTextField extends JTextField {
         setupFont();
         setOpaque(false);
         setBorder(new RoundedBoarder(20,10,Color.CYAN));
+        setMaximumSize(new Dimension(WIDTH, HEIGHT));
+        setMinimumSize(new Dimension(50, HEIGHT));
     }
     private void setupFont(){
         setForeground(brdColor);
