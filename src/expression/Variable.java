@@ -1,25 +1,29 @@
 package expression;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-public class Variable implements  Expression{
+public class Variable implements Expression {
     private String name;
     private double value;
 
+    public static final HashMap<String, Variable> variables = new HashMap<>();
 
-    public String getName(){
+
+    public String getName() {
         return name;
     }
 
-    public void setValue(double value){
+    public void setValue(double value) {
         this.value = value;
     }
 
-
     @Override
-    public Variable parse(String expression) {
-        name = expression;
-        return List.of(new Variable[]{this});
+    public HashMap<String, Variable> parse(String leftExpression, String rightExpression) {
+        name = leftExpression;
+        variables.put(name, this);
+        return variables;
     }
 
     @Override

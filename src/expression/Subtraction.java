@@ -1,13 +1,9 @@
 package expression;
 
+import java.util.HashMap;
 import java.util.List;
 
-public class Subtraction implements Expression{
-    @Override
-    public Variable parse(String expression) {
-        return List.of();
-    }
-
+public class Subtraction extends Operation implements Expression{
     @Override
     public double calculate() {
         return 0;

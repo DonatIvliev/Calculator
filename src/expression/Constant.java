@@ -1,5 +1,6 @@
 package expression;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class Constant implements Expression{
@@ -10,8 +11,8 @@ public class Constant implements Expression{
     }
 
     @Override
-    public Variable parse(String expression) {
-        return List.of(new Constant[]{});
+    public HashMap<String, Variable> parse(String leftExpression, String rightExpression) {
+        return Variable.variables;
     }
 
     @Override

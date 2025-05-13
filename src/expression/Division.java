@@ -1,12 +1,9 @@
 package expression;
 
+import java.util.HashMap;
 import java.util.List;
 
-public class Division implements Expression{
-    @Override
-    public Variable parse(String expression) {
-        return List.of();
-    }
+public class Division extends Operation implements Expression{
 
     @Override
     public double calculate() {
