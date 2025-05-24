@@ -8,7 +8,7 @@ public class Operation {
     private Expression left;
     private Expression right;
 
-    public HashMap<String, Variable> parse(String leftExpression, String rightExpression) {
+    public void parse(String leftExpression, String rightExpression) {
         if((leftExpression.length() == 1) && Character.isAlphabetic(leftExpression.charAt(0))){
             if(Variable.variables.get(leftExpression) == null) {
                 left = new Variable();
@@ -28,7 +28,13 @@ public class Operation {
 
 
         if((rightExpression.length() == 1) && Character.isAlphabetic(rightExpression.charAt(0))){
-            right = new Variable();
+            if(Variable.variables.get(rightExpression) == null) {
+                right = new Variable();
+            }
+            else{
+                right = Variable.variables.get(rightExpression);
+            }
+
         }
         else if(MathHelper.isNumber(rightExpression)){ //Function
             right = new Constant();
@@ -37,7 +43,7 @@ public class Operation {
             right = new Brackets();
         }
         right.parse(rightExpression,"" );
-        return Variable.variables;
+
     }
 
 

@@ -13,7 +13,7 @@ public class ExpressionCalculator {
 
     void parseExpressionString(){
         Expression expression = new Brackets();
-        var variables = expression.parse(expressionString,"");
-        System.out.println(variables);
+        expression.parse(expressionString,"");
+        System.out.println(Variable.variables);
     }
 }

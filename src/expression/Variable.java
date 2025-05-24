@@ -20,10 +20,10 @@ public class Variable implements Expression {
     }
 
     @Override
-    public HashMap<String, Variable> parse(String leftExpression, String rightExpression) {
+    public void parse(String leftExpression, String rightExpression) {
         name = leftExpression;
         variables.put(name, this);
-        return variables;
+        //TODO add new field to UI
     }
 
     @Override

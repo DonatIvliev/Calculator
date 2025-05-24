@@ -8,49 +8,51 @@ public class Brackets implements Expression{
     private Expression innerExpression;
 
     @Override
-    public HashMap<String, Variable> parse(String leftExpression, String rightExpression) {
+    public void parse(String leftExpression, String rightExpression) {
         String expression = leftExpression;
-
-        if ((expression.length() == 1) && Character.isAlphabetic(expression.charAt(0))) {
-            innerExpression = new Variable();
-            return innerExpression.parse(expression, "");
-        }
-
-        if (MathHelper.isNumber(expression)) {
-            innerExpression = new Constant();
-            return innerExpression.parse(expression, "");
-        }
-
-        List<String> parts = findAddition(expression);
-        if (!parts.isEmpty()) {
-            innerExpression = new Sum();
-            return innerExpression.parse(parts.get(0), parts.get(1));
-        }
-
-        parts = findSubtraction(expression);
-        if (!parts.isEmpty()) {
-            innerExpression = new Subtraction();
-            return innerExpression.parse(parts.get(0), parts.get(1));
-        }
-
-        parts = findMultiplication(expression);
-        if (!parts.isEmpty()) {
-            innerExpression = new Multiplication();
-            return innerExpression.parse(parts.get(0), parts.get(1));
-        }
-
-        parts = findDivision(expression);
-        if (!parts.isEmpty()) {
-            innerExpression = new Division();
-            return innerExpression.parse(parts.get(0), parts.get(1));
-        }
 
         if (expression.startsWith("(") && expression.endsWith(")")) {
             expression = expression.substring(1, expression.length() - 1);
         }
 
-        innerExpression = parseExpression(expression);
-        return innerExpression.parse(expression, "");
+        if ((expression.length() == 1) && Character.isAlphabetic(expression.charAt(0))) {
+            innerExpression = new Variable();
+            innerExpression.parse(expression, "");
+        }
+
+        if (MathHelper.isNumber(expression)) {
+            innerExpression = new Constant();
+            innerExpression.parse(expression, "");
+        }
+
+        List<String> parts = findAddition(expression);
+        if (!parts.isEmpty()) {
+            innerExpression = new Sum();
+            innerExpression.parse(parts.get(0), parts.get(1));
+        }
+
+        parts = findSubtraction(expression);
+        if (!parts.isEmpty()) {
+            innerExpression = new Subtraction();
+            innerExpression.parse(parts.get(0), parts.get(1));
+        }
+
+        parts = findMultiplication(expression);
+        if (!parts.isEmpty()) {
+            innerExpression = new Multiplication();
+            innerExpression.parse(parts.get(0), parts.get(1));
+        }
+
+        parts = findDivision(expression);
+        if (!parts.isEmpty()) {
+            innerExpression = new Division();
+            innerExpression.parse(parts.get(0), parts.get(1));
+        }
+
+
+
+        //innerExpression = parseExpression(expression);
+        //innerExpression.parse(expression, "");
     }
 
 

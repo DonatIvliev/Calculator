@@ -9,9 +9,15 @@ public class Function implements Expression{
     private List<Variable> parts = new ArrayList<>();
 
     @Override
-    public HashMap<String, Variable> parse(String leftExpression, String rightExpression) {
+    public void parse(String leftExpression, String rightExpression) {
         if((leftExpression.length() == 1) && Character.isAlphabetic(leftExpression.charAt(0))){
-            left = new Variable();
+            if(Variable.variables.get(leftExpression) == null) {
+                left = new Variable();
+            }
+            else{
+                left = Variable.variables.get(leftExpression);
+            }
+
         }
         else if(MathHelper.isNumber(leftExpression)){ //Function
             left = new Constant();
@@ -19,7 +25,7 @@ public class Function implements Expression{
         else{
             left = new Brackets();
         }
-        return left.parse(leftExpression, "");
+        left.parse(leftExpression, "");
     }
 
 

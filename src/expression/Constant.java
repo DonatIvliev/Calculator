@@ -11,8 +11,9 @@ public class Constant implements Expression{
     }
 
     @Override
-    public HashMap<String, Variable> parse(String leftExpression, String rightExpression) {
-        return Variable.variables;
+    public void parse(String leftExpression, String rightExpression) {
+        value = Double.parseDouble(leftExpression);
+
     }
 
     @Override
