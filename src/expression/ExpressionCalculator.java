@@ -1,6 +1,7 @@
 package expression;
 
 
+import java.util.ArrayList;
 
 public class ExpressionCalculator {
     private String expressionString;
@@ -15,5 +16,9 @@ public class ExpressionCalculator {
         Expression expression = new Brackets();
         expression.parse(expressionString,"");
         System.out.println(Variable.variables);
+    }
+
+    public ArrayList<String> getVariablesList(){
+        return new ArrayList<>(Variable.variables.keySet());
     }
 }

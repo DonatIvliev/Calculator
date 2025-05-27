@@ -7,11 +7,12 @@ import ui.textFields.ExpressionJTextField;
 import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class VariablesJPanel extends JPanel {
     private static final int HEIGHT = 200;
     private static final int WIDTH = 500;
-    private int variablesCount = 12;
+    //private int variablesCount = 12;
     GridBagConstraints gbc = new GridBagConstraints();
     GroupLayout layout;
     public VariablesJPanel(){
@@ -19,16 +20,19 @@ public class VariablesJPanel extends JPanel {
     }
 
     private void setupUi() {
-        int rows = variablesCount % 2 == 0?variablesCount/2: variablesCount/2 + 1;
+        int rows = 1;
         int height = rows * 29;
         setPreferredSize(new Dimension(WIDTH,height));
         setBackground(new Color(255, 255, 255));
         layout = new GroupLayout(this);
         setLayout(layout);
-        createVariables();
+        //createVariables();
 
     }
 
+    public void variablesUpdated(ArrayList<String> variables){
+        createVariables(variables);
+    }
 
     private void createSingleRow(MainJButton button , ExpressionJTextField field, GroupLayout.SequentialGroup vGroup,  GroupLayout.ParallelGroup col1,  GroupLayout.ParallelGroup col2){
         button = new MainJButton("A");
@@ -46,8 +50,12 @@ public class VariablesJPanel extends JPanel {
 
 
 
-    private void createVariables() {
+    private void createVariables(ArrayList<String> variables) {
+        int variablesCount = variables.size();
         int rows = variablesCount % 2 == 0?variablesCount/2: variablesCount/2 + 1;
+        int height = rows * 29;
+        setPreferredSize(new Dimension(WIDTH,height));
+        removeAll();
         MainJButton[][] buttons = new MainJButton[rows][2];
         ExpressionJTextField[][] fields = new ExpressionJTextField[rows][2];
 
@@ -70,7 +78,7 @@ public class VariablesJPanel extends JPanel {
 
 
 
-            buttons[i][1] = new MainJButton("A");
+            buttons[i][1] = new MainJButton("B");
             //buttons[i][1].setPreferredSize(new Dimension(100, 50));
             fields[i][1] = new ExpressionJTextField(new Color(255, 176, 176), new Color(255, 255, 255));
             //fields[i][1].setPreferredSize(new Dimension(50, 50));
@@ -99,5 +107,8 @@ public class VariablesJPanel extends JPanel {
         hGroup.addGroup(col4);
         layout.setHorizontalGroup(hGroup);
         layout.setVerticalGroup(vGroup);
+        invalidate();
+        validate();
+
     }
 }

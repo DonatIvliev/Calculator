@@ -50,7 +50,13 @@ public class MainWindow extends JFrame implements ExpressionDelegate {
     }
 
     @Override
-    public void expressionUpdated(String expression) {
+    public void expressionUpdated(String expression)
+    {
         calculator.setExpressionString(expression);
+        System.out.println(calculator.getVariablesList());
+        variablesPanel.variablesUpdated(calculator.getVariablesList());
+        invalidate();
+        validate();
+        pack();
     }
 }
