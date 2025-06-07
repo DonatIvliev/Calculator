@@ -1,15 +1,14 @@
 package ui;
 
-import ui.panels.ExpressionDelegate;
-import ui.panels.ExpressionJPanel;
-import ui.panels.ResultsJPanel;
-import ui.panels.VariablesJPanel;
+import ui.panels.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+
 import expression.ExpressionCalculator;
 
-public class MainWindow extends JFrame implements ExpressionDelegate {
+public class MainWindow extends JFrame implements ExpressionDelegate, ResultsPanelDelegate {
     private Container mainContainer;
     ExpressionJPanel expressionPanel;
     VariablesJPanel variablesPanel;
@@ -42,6 +41,7 @@ public class MainWindow extends JFrame implements ExpressionDelegate {
         expressionPanel = new ExpressionJPanel();
         expressionPanel.delegate = this;
         resultsPanel = new ResultsJPanel();
+        resultsPanel.delegate = this;
         variablesPanel = new VariablesJPanel();
 
         mainContainer.add(expressionPanel, BorderLayout.PAGE_START);
@@ -58,5 +58,15 @@ public class MainWindow extends JFrame implements ExpressionDelegate {
         invalidate();
         validate();
         pack();
+    }
+
+    @Override
+    public String getResult() {
+
+
+        calculator.setVariablesValue(variablesPanel.getVariablesValue());
+        return calculator.calculate();
+
+
     }
 }

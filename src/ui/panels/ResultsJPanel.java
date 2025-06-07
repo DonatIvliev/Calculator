@@ -5,8 +5,11 @@ import ui.labels.MainLabel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+
 
 public class ResultsJPanel  extends JPanel {
+    public ResultsPanelDelegate delegate;
     private static final int HEIGHT = 100;
     private static final int WIDTH = 500;
     private MainLabel resultLabel;
@@ -32,6 +35,10 @@ public class ResultsJPanel  extends JPanel {
         add(resultLabel);
         add(Box.createHorizontalStrut(10));
         resultButton = new MainJButton("Calculate");
+        resultButton.addActionListener(e->{
+            String result = delegate.getResult();
+            System.out.println(result);
+        });
         add(resultButton);
         add(Box.createHorizontalStrut(10));
 

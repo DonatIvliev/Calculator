@@ -6,6 +6,6 @@ import java.util.List;
 public class Multiplication extends Operation implements Expression{
     @Override
     public double calculate() {
-        return 0;
+        return left.calculate() * right.calculate();
     }
 }

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Operation {
-    private Expression left;
-    private Expression right;
+    protected Expression left;
+    protected Expression right;
 
     public void parse(String leftExpression, String rightExpression) {
         if((leftExpression.length() == 1) && Character.isAlphabetic(leftExpression.charAt(0))){

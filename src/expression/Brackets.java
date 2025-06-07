@@ -17,36 +17,48 @@ public class Brackets implements Expression{
 
         if ((expression.length() == 1) && Character.isAlphabetic(expression.charAt(0))) {
             innerExpression = new Variable();
+            System.out.println(innerExpression);
             innerExpression.parse(expression, "");
+            return;
         }
 
         if (MathHelper.isNumber(expression)) {
             innerExpression = new Constant();
+            System.out.println(innerExpression);
             innerExpression.parse(expression, "");
+            return;
         }
 
         List<String> parts = findAddition(expression);
         if (!parts.isEmpty()) {
             innerExpression = new Sum();
+            System.out.println(innerExpression);
             innerExpression.parse(parts.get(0), parts.get(1));
+            return;
         }
 
         parts = findSubtraction(expression);
         if (!parts.isEmpty()) {
             innerExpression = new Subtraction();
+            System.out.println(innerExpression);
             innerExpression.parse(parts.get(0), parts.get(1));
+            return;
         }
 
         parts = findMultiplication(expression);
         if (!parts.isEmpty()) {
             innerExpression = new Multiplication();
+            System.out.println(innerExpression);
             innerExpression.parse(parts.get(0), parts.get(1));
+            return;
         }
 
         parts = findDivision(expression);
         if (!parts.isEmpty()) {
             innerExpression = new Division();
+            System.out.println(innerExpression);
             innerExpression.parse(parts.get(0), parts.get(1));
+            return;
         }
 
 

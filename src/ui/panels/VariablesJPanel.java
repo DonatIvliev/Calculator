@@ -8,8 +8,11 @@ import javax.imageio.stream.ImageInputStream;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class VariablesJPanel extends JPanel {
+    private MainJButton[][] buttons;
+    private ExpressionJTextField[][] fields;
     private static final int HEIGHT = 200;
     private static final int WIDTH = 500;
     //private int variablesCount = 12;
@@ -34,10 +37,10 @@ public class VariablesJPanel extends JPanel {
         createVariables(variables);
     }
 
-    private void createSingleRow(MainJButton button , ExpressionJTextField field, GroupLayout.SequentialGroup vGroup,  GroupLayout.ParallelGroup col1,  GroupLayout.ParallelGroup col2){
-        button = new MainJButton("A");
+    private void createSingleRow(String variable, GroupLayout.SequentialGroup vGroup, GroupLayout.ParallelGroup col1, GroupLayout.ParallelGroup col2){
+        MainJButton button = new MainJButton(variable);
         //buttons[i][0].setPreferredSize(new Dimension(100, 50));
-        field = new ExpressionJTextField(new Color(255, 176, 176), new Color(255, 255, 255));
+        ExpressionJTextField field = new ExpressionJTextField(new Color(255, 176, 176), new Color(255, 255, 255));
         //fields[i][0].setPreferredSize(new Dimension(50, 50));
 
         col1.addComponent(button);
@@ -53,11 +56,12 @@ public class VariablesJPanel extends JPanel {
     private void createVariables(ArrayList<String> variables) {
         int variablesCount = variables.size();
         int rows = variablesCount % 2 == 0?variablesCount/2: variablesCount/2 + 1;
+        int pairRows = variablesCount % 2 == 0?rows:rows-1;
         int height = rows * 29;
         setPreferredSize(new Dimension(WIDTH,height));
         removeAll();
-        MainJButton[][] buttons = new MainJButton[rows][2];
-        ExpressionJTextField[][] fields = new ExpressionJTextField[rows][2];
+        buttons = new MainJButton[pairRows][2];
+        fields = new ExpressionJTextField[pairRows][2];
 
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
@@ -68,9 +72,11 @@ public class VariablesJPanel extends JPanel {
         GroupLayout.ParallelGroup col2 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
         GroupLayout.ParallelGroup col3 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
         GroupLayout.ParallelGroup col4 = layout.createParallelGroup(GroupLayout.Alignment.LEADING);
-        int pairRows = variablesCount % 2 == 0?rows:rows-1;
+
         for(int i = 0; i < pairRows ; i++) {
-            buttons[i][0] = new MainJButton("A");
+            int index1 = i * 2;
+            int index2 = i * 2 + 1;
+            buttons[i][0] = new MainJButton(variables.get(index1));
             buttons[i][0].setBorder(null);
             //buttons[i][0].setPreferredSize(new Dimension(100, 50));
             fields[i][0] = new ExpressionJTextField(new Color(255, 176, 176), new Color(255, 255, 255));
@@ -78,7 +84,7 @@ public class VariablesJPanel extends JPanel {
 
 
 
-            buttons[i][1] = new MainJButton("B");
+            buttons[i][1] = new MainJButton(variables.get(index2));
             //buttons[i][1].setPreferredSize(new Dimension(100, 50));
             fields[i][1] = new ExpressionJTextField(new Color(255, 176, 176), new Color(255, 255, 255));
             //fields[i][1].setPreferredSize(new Dimension(50, 50));
@@ -99,7 +105,8 @@ public class VariablesJPanel extends JPanel {
 
         }
         if(pairRows < rows) {
-            createSingleRow(buttons[rows - 1][0], fields[rows - 1][0], vGroup, col1, col2);
+            createSingleRow(variables.get(variablesCount - 1), vGroup, col1, col2);
+
         }
         hGroup.addGroup(col1);
         hGroup.addGroup(col2);
@@ -110,5 +117,15 @@ public class VariablesJPanel extends JPanel {
         invalidate();
         validate();
 
+    }
+
+    public HashMap<String, String> getVariablesValue() {
+        HashMap<String, String> variables = new HashMap<>();
+        for(int i = 0; i <buttons.length; i++){
+            for(int j = 0; j <buttons[i].length; j++){
+                variables.put(buttons[i][j].getText(), fields[i][j].getText());
+            }
+        }
+        return variables;
     }
 }

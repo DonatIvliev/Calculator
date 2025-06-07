@@ -6,9 +6,6 @@ import java.util.List;
 public class Sum extends Operation implements  Expression{
 
     private String name;
-    private Expression left;
-    private Expression right;
-    private List<Variable> parts = new ArrayList<>();
 
     public String getName(){
         return name;
