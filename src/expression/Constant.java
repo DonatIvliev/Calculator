@@ -18,6 +18,7 @@ public class Constant implements Expression{
 
     @Override
     public double calculate() {
+        System.out.println("Const = " + value);
         return value;
     }
 }

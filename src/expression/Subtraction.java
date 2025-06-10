@@ -13,6 +13,9 @@ public class Subtraction extends Operation implements Expression{
 
     @Override
     public double calculate() {
-        return left.calculate() - right.calculate();
+        double leftValue = left.calculate();
+        double rightValue = right.calculate();
+        System.out.println("Subtraction = " + (leftValue - rightValue));
+        return leftValue - rightValue;
     }
 }

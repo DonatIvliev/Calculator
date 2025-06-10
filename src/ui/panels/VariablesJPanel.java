@@ -38,17 +38,17 @@ public class VariablesJPanel extends JPanel {
     }
 
     private void createSingleRow(String variable, GroupLayout.SequentialGroup vGroup, GroupLayout.ParallelGroup col1, GroupLayout.ParallelGroup col2){
-        MainJButton button = new MainJButton(variable);
+        buttons[buttons.length-1][0] = new MainJButton(variable);
         //buttons[i][0].setPreferredSize(new Dimension(100, 50));
-        ExpressionJTextField field = new ExpressionJTextField(new Color(255, 176, 176), new Color(255, 255, 255));
+        fields[fields.length-1][0] = new ExpressionJTextField(new Color(255, 176, 176), new Color(255, 255, 255));
         //fields[i][0].setPreferredSize(new Dimension(50, 50));
 
-        col1.addComponent(button);
-        col2.addComponent(field);
+        col1.addComponent(buttons[buttons.length-1][0]);
+        col2.addComponent(fields[fields.length-1][0]);
 
         vGroup.addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                .addComponent(button)
-                .addComponent(field));
+                .addComponent(buttons[buttons.length-1][0])
+                .addComponent(fields[fields.length-1][0]));
     }
 
 
@@ -60,8 +60,8 @@ public class VariablesJPanel extends JPanel {
         int height = rows * 29;
         setPreferredSize(new Dimension(WIDTH,height));
         removeAll();
-        buttons = new MainJButton[pairRows][2];
-        fields = new ExpressionJTextField[pairRows][2];
+        buttons = new MainJButton[rows][2];
+        fields = new ExpressionJTextField[rows][2];
 
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
@@ -121,9 +121,16 @@ public class VariablesJPanel extends JPanel {
 
     public HashMap<String, String> getVariablesValue() {
         HashMap<String, String> variables = new HashMap<>();
+        System.out.println(buttons.length + " " + fields.length);
         for(int i = 0; i <buttons.length; i++){
+            System.out.println("row: " + i);
             for(int j = 0; j <buttons[i].length; j++){
-                variables.put(buttons[i][j].getText(), fields[i][j].getText());
+                System.out.println("col: " + j);
+                System.out.println(buttons[i].length + " " + fields[i].length);
+                if(buttons[i][j] != null) {
+                    variables.put(buttons[i][j].getText(), fields[i][j].getText());
+                }
+
             }
         }
         return variables;

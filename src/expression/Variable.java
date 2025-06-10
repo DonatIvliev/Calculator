@@ -28,6 +28,8 @@ public class Variable implements Expression {
 
     @Override
     public double calculate() {
+
+        System.out.println(name + "=" + value);
         return value;
     }
 }
